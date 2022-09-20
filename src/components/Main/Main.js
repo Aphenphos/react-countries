@@ -2,8 +2,12 @@ import { useCountries } from '../../hooks/useCountries';
 import CountryCard from '../CountryCard';
 
 export default function Main() {
-  const { filterCountries, error, setContinent, continent } = useCountries();
-
+  const { filterCountries, error, setContinent, continent, loading } = useCountries();
+  if (loading === true) {
+    return (
+      <h1>Loading Loading Loading Loading Loading Loading Loading Loading Loading Loading </h1>
+    );
+  }
   return (
     <main>
       <p className='error'>{error}</p>
