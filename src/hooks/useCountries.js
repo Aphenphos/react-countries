@@ -3,13 +3,25 @@ import { getCountries } from '../services/getCountries';
 
 export function useCountries() {
   const [countries, setCountries] = useState([]);
+  const [error, setError] = useState('');
+  const [continent, setContinent] = useState('All');
 
   useEffect(() => {
     async function fetchCountries() {
-      const c = await getCountries();
-      setCountries(c);
+      try {
+        const c = await getCountries();
+        setCountries(c);
+      } catch (e) {
+        setError(e.message);
+      }
     }
     fetchCountries();
   }, []);
-  return countries;
+
+  const filterCountries = () => {
+    if (continent === 'All') return countries;
+    return countries.filter((country) => country.continent === continent);
+  };
+
+  return { filterCountries, error, continent, setContinent };
 }
