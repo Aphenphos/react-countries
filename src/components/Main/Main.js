@@ -1,5 +1,6 @@
 import { useCountries } from '../../hooks/useCountries';
 import CountryCard from '../CountryCard';
+import './Main.css';
 
 export default function Main() {
   const { filterCountries, error, setContinent, continent, loading } = useCountries();
@@ -25,9 +26,11 @@ export default function Main() {
         <option value="Africa">Africa</option>
         <option value="Antarctica">Antarctica</option>
       </select>
-      {filterCountries().map((country) => (
-        <CountryCard key={country.id} {...country}></CountryCard>
-      ))}
+      <div id="country-container">
+        {filterCountries().map((country) => (
+          <CountryCard key={country.id} {...country}></CountryCard>
+        ))}
+      </div>
     </main>
   );
 }
